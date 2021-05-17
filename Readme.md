@@ -1,5 +1,5 @@
 # Repository info
-This repository should help everyone to build a staic c++ socket.io-client-cpp library for iOS and macOS. This library is needed for WebRTC frameworks as OWT https://github.com/open-webrtc-toolkit/owt-client-native 
+This repository should help everyone to build a staic c++ socket.io-client-cpp library for iOS and macOS. The library socket.io-client-cpp is maintained under https://github.com/socketio/socket.io-client-cpp. This library is needed for WebRTC frameworks as OWT https://github.com/open-webrtc-toolkit/owt-client-native 
 
 # Build socket.io-client-cpp
 In this manual we plan to use the library `socket.io-client-cpp` for the iOS client Framework of OWT https://github.com/open-webrtc-toolkit/owt-client-native. To run later OWT.framework and WebRTC.framework within your iOS App, we need `libsioclient.a` (or if SSL is used `libsioclient_tsl.a`). To build these files you need some time and normally a lot of patience. 
@@ -8,7 +8,7 @@ To be much faster, we also deliver a precompiled version under this link: [stati
 
 ## Compile socket.io-client-cpp from scratch for iOS
 1. We need OpenSSL build for iOS. The manual way is a little time consuming. You can use the following script to create a fresh and clean iOS OpenSSL build: [build openssl for iOS](https://github.com/kim-company/openssl-ios-static/blob/master/build-openssl-for-ios.sh).
-   * If you don't want to use the script, you can download the necessary files from here: [OpenSSL static iOS builds]([static-build folder](https://github.com/kim-company/openssl-ios-static/tree/master/static_builds/)
+   * If you don't want to use the script, you can download the necessary files from here: [OpenSSL static iOS builds](https://github.com/kim-company/openssl-ios-static/tree/master/static_builds/)
    * If you want to use the above script, you got and folder called "build_openssl" and the folder we need later is the following: `build_openssl/arm64/` 
    * If you created by your own, you should have a folder that contains: 
       * `lib/libcrypto.a`
@@ -39,3 +39,5 @@ To be much faster, we also deliver a precompiled version under this link: [stati
     - **Optional**: You can also create a FAT library (containing both libraries at once). So you can run your project in Simulator and on an iOS device. After creating both socket.io-client-cpp versions (see above: arm64 and x86_64), you should have 4 files (2x libsioclient_tls.a, 2x libsioclient.a).
         - To create a FAT library for "libsioclient_tsl.a", you just have to run the following command: `lipo -static x86_64/libsioclient_tls.a arm64/libsioclient_tls.a -output fat/libsioclient_tls.a -create`
     
+    ## Notes
+    * Since commit `af68bf3067ab45dc6a53261284e0da9afd21b636` (7. January 2021) you **don't need** the Boost c++ library anymore. This simplyfies the build process a lot. 
